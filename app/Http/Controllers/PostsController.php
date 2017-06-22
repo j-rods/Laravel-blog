@@ -11,7 +11,7 @@ class PostsController extends Controller
     public function index() {
       
         // render stored posts
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->get();
         
         // load a view that will be in a posts folder and will have a name that corresponds to the action
         return view('posts.index', compact('posts'));
