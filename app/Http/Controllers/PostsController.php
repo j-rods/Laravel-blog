@@ -9,8 +9,12 @@ class PostsController extends Controller
 {
     // this is a controller action
     public function index() {
+      
+        // render stored posts
+        $posts = Post::all();
+        
         // load a view that will be in a posts folder and will have a name that corresponds to the action
-        return view('posts.index');
+        return view('posts.index', compact('posts'));
     }
     
     public function show() {
