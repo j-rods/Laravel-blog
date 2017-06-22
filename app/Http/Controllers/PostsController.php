@@ -22,6 +22,12 @@ class PostsController extends Controller
     }
     
     public function store() {
+        // form validation
+        $this->validate(request(), [
+          'title' => 'required',
+          'body' => 'required'
+        ]);
+        
         // create a new post using the request data
         Post::create(request(['title', 'body']));
         // Redirect to home page
