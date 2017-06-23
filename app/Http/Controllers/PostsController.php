@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Post;
 
 class PostsController extends Controller {
+    public function __construct() {
+      $this->middleware('auth')->except(['index', 'show']);
+    }
     // this is a controller action
     public function index() {
       
@@ -32,7 +35,11 @@ class PostsController extends Controller {
         ]);
         
         // create a new post using the request data
-        Post::create(request(['title', 'body']));
+        Post::create([
+          'title' => request('title'), 
+          'body' => request('body'), 
+          'user_id' => auth()->id()
+        ]);
         // Redirect to home page
         return redirect('/');
     }
