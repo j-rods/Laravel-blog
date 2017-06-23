@@ -9,12 +9,7 @@ class CommentsController extends Controller
 {
     // Receive the post
     public function store(Post $post) {
-      
-      Comment::create([
-        'body' => request('body'),
-        'post_id' => $post->id 
-      ]);
-      
+      $post->addComment(request('body'));
       return back(); // helper function that returns user to the previous page
     }
 }
