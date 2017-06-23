@@ -9,9 +9,14 @@ class Post extends Model
     }
     // write the add comment function and accept the body of the comment
     public function addComment($body) {
-      Comment::create([
-        'body' => $body,
-        'post_id' => $this->id
-      ]);
+      
+      // because we already have a relationship with comment,
+      // you can refactor using eloquent
+      $this->comments()->create(compact('body'));
+      
+      // Comment::create([
+      //   'body' => $body,
+      //   'post_id' => $this->id
+      // ]);
     }
 }
