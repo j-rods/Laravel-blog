@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
+
 class Post extends Model
 {
     public function comments() {
@@ -12,12 +14,13 @@ class Post extends Model
       
       // because we already have a relationship with comment,
       // you can refactor using eloquent
-      $this->comments()->create(compact('body'));
+      // $this->comments()->create(compact('body'));
       
-      // Comment::create([
-      //   'body' => $body,
-      //   'post_id' => $this->id
-      // ]);
+      Comment::create([
+        'body' => $body,
+        'post_id' => $this->id,
+        'user_id' => Auth::user()->id
+      ]);
     }
     public function user() {
       return $this->belongsTo(User::class);
