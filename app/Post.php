@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -25,7 +26,15 @@ class Post extends Model
     public function user() {
       return $this->belongsTo(User::class);
     }
-    public function scopeFilter($query, $filter) {
-      
+    
+    //query scopes
+    public function scopeFilter($query, $filters) {
+      if ($month = $filters['month']) {
+          $query->whereMonth('created_at', Carbon::parse($month)->month)->get(); //march => 3, may => 5
+        }
+        
+        if ($year = $filters['year']) {
+          $query->whereYear('created_at', $year)->get();
+        }
     }
 }
