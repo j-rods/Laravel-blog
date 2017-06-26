@@ -33,7 +33,7 @@ class PostsController extends Controller {
           'title' => 'required',
           'body' => 'required'
         ]);
-        
+
         // Call a method on authenticated user object
         auth()->user()->publish(
           new Post(request(['title', 'body']))
