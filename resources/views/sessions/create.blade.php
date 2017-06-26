@@ -4,7 +4,7 @@
     <div class="col-sm-8 blog-main">
       <h1>Sign In</h1>
       
-      <form method="POST" action="/sessions">
+      <form method="POST" action="/login">
         {{ csrf_field() }}
         
         <div class="form-group">
@@ -20,6 +20,8 @@
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Sign In</button>
         </div>
+        
+        @include ('layouts.errors')
         
       </form>
       
