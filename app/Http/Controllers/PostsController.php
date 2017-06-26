@@ -20,14 +20,10 @@ class PostsController extends Controller {
           ->filter(request(['month', 'year']))
           ->get();
         
-        $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
-          ->groupBy('year', 'month')
-          ->orderByRaw('min(created_at) desc')
-          ->get()
-          ->toArray();
+        // $archives = Post::archives();
           
         // load a view that will be in a posts folder and will have a name that corresponds to the action
-        return view('posts.index', compact('posts', 'archives'));
+        return view('posts.index', compact('posts'));
     }
     
     public function show(Post $post) {
