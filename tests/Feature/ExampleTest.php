@@ -14,10 +14,11 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testIndexIntro()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->get('/')->assertSee('The Bootstrap Blog');
+    }
+    public function testArchiveModule() {
+        $this->get('/')->assertSee('Archives');
     }
 }
