@@ -4,6 +4,6 @@
         
     </head>
     <body>
-        <h1>Welcome to this blog!</h1>
+        <h1>Welcome to your amazing blog, {{ $user->name }}!</h1>
     </body>
 </html>
