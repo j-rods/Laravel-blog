@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\Repositories\Posts;
 use Carbon\Carbon;
 
 
@@ -13,15 +14,11 @@ class PostsController extends Controller {
       $this->middleware('auth')->except(['index', 'show']);
     }
     // this is a controller action
-    public function index() {
-        // render stored posts
-        // $posts = Post::orderBy('created_at', 'desc')->get();
-        $posts = Post::latest()
-          ->filter(request(['month', 'year']))
-          ->get();
-        
-        // $archives = Post::archives();
-          
+    // automatic dependency injection: ask for an instance of Post, return all $posts
+    public function index(Posts $posts) {
+        // render stored posts from the repository
+        $posts = $posts->all();
+       
         // load a view that will be in a posts folder and will have a name that corresponds to the action
         return view('posts.index', compact('posts'));
     }
