@@ -18,7 +18,9 @@ class PostsController extends Controller {
     public function index(Posts $posts) {
     
         // render stored posts from the repository
-        $posts = $posts->all();
+        $posts = Post::latest()
+          ->filter(request(['month', 'year']))
+          ->get();
        
         // load a view that will be in a posts folder and will have a name that corresponds to the action
         return view('posts.index', compact('posts'));
