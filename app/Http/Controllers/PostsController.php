@@ -14,9 +14,8 @@ class PostsController extends Controller {
       $this->middleware('auth')->except(['index', 'show']);
     }
     // this is a controller action
-    // automatic dependency injection: ask for an instance of Post, return all $posts
-    public function index(Posts $posts) {
-    
+    public function index() {
+        
         // render stored posts from the repository
         $posts = Post::latest()
           ->filter(request(['month', 'year']))
