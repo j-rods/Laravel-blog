@@ -26,6 +26,6 @@ class NotifySuscribers
      */
     public function handle(ThreadCreated $event)
     {
-        //
+        var_dump($event->thread['name'] . ' was published to the forum.');
     }
 }
