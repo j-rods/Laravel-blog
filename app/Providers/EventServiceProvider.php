@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\ThreadCreated' => [
             'App\Listeners\NotifySuscribers',
+            'App\Listeners\CheckForSpam',
         ],
     ];
 
