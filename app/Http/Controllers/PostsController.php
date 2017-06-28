@@ -16,6 +16,7 @@ class PostsController extends Controller {
     // this is a controller action
     // automatic dependency injection: ask for an instance of Post, return all $posts
     public function index(Posts $posts) {
+    
         // render stored posts from the repository
         $posts = $posts->all();
        
@@ -42,6 +43,11 @@ class PostsController extends Controller {
         auth()->user()->publish(
           new Post(request(['title', 'body']))
         );
+        
+        session()->flash(
+          'message', 'Your post has now been published.'
+        );
+        
         // Redirect to home page
         return redirect('/');
     }
